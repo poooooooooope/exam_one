@@ -11,16 +11,19 @@ def send_welcome(message):
 @bot.message_handler(content_types=['text'])
 def reply_to_text(message):
     bot.reply_to(message, message.text)
-    vowels = {'a', 'e', 'i', 'o', 'u', 'y'}
+    # vowels = {'a', 'e', 'i', 'o', 'u', 'y'}
     # vowels = ('aeiouy')
+    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
     count = 0
 
     for i in message.text:
-        if i == vowels:
-           count += 1
+        c = i == vowels
+        if c:
+            count += 1
 
-    bot.reply_to(message, count)
-
+        bot.send_message(
+            chat_id=message.chat.id, text=count
+        )
 
 
 bot.infinity_polling()
